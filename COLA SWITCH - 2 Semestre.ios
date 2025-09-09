@@ -1,0 +1,93 @@
+ TROCAR NOME DO EQUIPAMENTO
+>enable
+#configure terminal
+(config)# hostname <novo-nome>
+(config)# exit
+#exit
+>   
+
+ CONFIGURAR UM BANNER
+ >enable
+ #configure terminal
+ (config)# banner motd "texto"  !Acesso apenas para pessoas autorizadas!
+ (config)#end  !Ctrl+Z!
+ #exit
+ >
+
+! M.O.T.D - Mensagem Of The Day (Mensagem Do Dia)!
+
+CONFIGURAR SENHA NA CONSOLE
+
+>enable
+#configure terminal
+(config)#line console 0
+(config-line)#password <senha> batata0
+(config-line)#login
+(config-line)#Ctrl+Z
+#exit
+
+CONFIGURAR SENHA NA ENABLE 
+
+>enable
+#configure terminal
+(config)#enable password <senha> senhasecreta !***TYPE 7 + ANTIGA - SEGURA
+(config)#enable secret <senha> senhasegura !***TYPE 5 + NOVA + SEGURA
+(config)#login
+(config)#end
+#disable
+ 
+
+VERIFICAR AS CONFIGURACOES QUE ESTAO RODANDO NO EQUIPAMENTO
+
+>enable
+#show running-config !memoria ram
+#show startup-config !memoria nvram  (Igual hhd ss)
+
+ATIVAR O SERVICO DE CRIPTOGRAFIA 
+
+>enable
+#configure terminal
+(config)#service password-encryption
+(config)#end
+#exit
+>
+
+
+DESFAZER CONFIGURACOES NO IOS
+!colocar o "no" antes do comando
+
+>enable
+#configure terminal
+(config)#no hostname
+(config)#no enable password !desfaz a senha da password na enable
+(config)#end
+#exit
+>
+
+RESOLVER ERRO DE TRANSSLATING
+!Use as teclas ctrl+ shift + 6
+
+DESATIVAR UMA INTERFACE
+
+>enable
+#configure terminal
+(config)# interface <nome>
+(config)#interface ?
+(config)#interface fastEthernet 0/2
+(config-if)#shutdown
+(config-if)#end
+>
+
+DESATIVAR VARIAS INTERFACES DE UMA SO VEZ
+>enable
+#configure terminal
+(config)#interface range <intervalo>
+(config)#interface range fastEthernet 0/1-3
+(config-if-range)#shutdown
+
+DESATIVAR INTERVALOS DE INTERFACES DIFERENTES
+>enable
+#configure terminal
+(config)#interface range fastEthernet 0/1-3 , 0/8-24 ! 1 a 3 e 8 a 24 (intervalos de interface)
+(config)#interface range fa0/1 , fa0/5 , fa0/22 ! apenas 3 interface
+
